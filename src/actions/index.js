@@ -28,6 +28,7 @@ export const createStream = formValues => async (dispatch, getState) => {
   const res = await streams.post('/streams', { ...formValues, userId });
 
   dispatch({ type: CREATE_STREAM, payload: res.data });
+  // Navigate user back to homepage
   history.push('/');
 };
 
@@ -44,9 +45,11 @@ export const fetchStream = id => async dispatch => {
 };
 
 export const editStream = (id, formValues) => async dispatch => {
-  const res = await streams.put(`/streams/${id}`, formValues);
+  const res = await streams.patch(`/streams/${id}`, formValues);
 
   dispatch({ type: EDIT_STREAM, payload: res.data });
+  // Navigate user back to homepage
+  history.push('/');
 };
 
 export const deleteStream = id => async dispatch => {
